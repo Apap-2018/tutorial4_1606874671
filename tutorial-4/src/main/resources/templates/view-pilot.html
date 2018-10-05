@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>View Detail</title>
+	</head>
+	<body>
+		<h2>Identitas Pilot</h2>
+		<h3 th:text="'Pilot License Number: ' + ${pilot.licenseNumber}"></h3>
+		<h3 th:text="'Name: ' + ${pilot.name}"></h3>
+		<h3 th:text="'FlyHour: ' + ${pilot.flyHour}"></h3>
+		<td><a th:href="@{/pilot/update/license-number/} + ${pilot.licenseNumber}"><button>Update Pilot</button></a></td>
+		<td><a th:href="@{/pilot/delete/id/} + ${pilot.id}"><button>Delete Pilot</button></a></td>
+		</br>
+		<div th:if="${not #lists.isEmpty(listFlight)}">
+		<h2>Daftar Flight</h2>
+		</div>
+		<div th:each="flight : ${listFlight}">
+			<p th:text="'Flight ID: ' + ${flight.id}"></p>
+			<p th:text="'Flight Number: ' + ${flight.flightNumber}"></p>
+			<p th:text="'Origin: ' + ${flight.origin}"></p>
+			<p th:text="'Destination: ' + ${flight.destination}"></p>
+			<p th:text="'Time: ' + ${flight.time}"></p>
+			<p th:text="'Pilot Name: ' + ${flight.pilot.getName()}"></p>
+			<p th:text="'Pilot License Number: ' + ${flight.pilot.getLicenseNumber()}"></p>
+			<td><a th:href="@{/flight/update/id/} + ${flight.id}"><button>Update Flight</button></a></td>
+			<td><a th:href="@{/flight/delete/id/} + ${flight.id}"><button>Delete Flight</button></a></td>
+			</br>
+			</br>
+		</div>
+		<td><h3>Tambah penerbangan:</h3><a th:href="@{/flight/add/} + ${pilot.licenseNumber}"><button>Add Flight</button></a></td>
+	</body>
+</html>
